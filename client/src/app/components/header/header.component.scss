@@ -1,0 +1,64 @@
+@import "../../../variables";
+.header{
+    background-color: $colorAzul;
+    padding: 15px 0;
+    font-family: 'Bree Serif', serif;
+    .nav, .menu{
+        display: flex;
+    }
+    nav{
+        justify-content: space-between;
+    }
+    .menu{
+        list-style: none;
+        margin:0;
+        padding: 0;    
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 50%;
+        &__item{
+            margin-right: 30px;            
+            a{
+                color:$white;
+                font-size: 18px;
+                text-decoration: none;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
+        }
+        &__item--cart{
+            margin-right: 0px;
+            img{
+                width: 60px;
+            }
+        }
+    }
+
+    .logo{
+        display: flex;
+        width: 40%;
+        text-align: center;
+        align-items: center;
+        img{
+            width: 100px;
+        }
+        h4{
+            margin: 0 0 0 10px;
+            font-size: 32px;            
+            color:$white;
+        }
+    }
+
+}
+
+@media screen and (max-width: 768px){
+    .header{
+        width: 100%;
+        padding: 15px 30px;
+        .menu__item--cart img{
+            width: 50px;
+        }
+    }
+}

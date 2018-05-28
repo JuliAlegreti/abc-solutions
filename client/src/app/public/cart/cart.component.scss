@@ -1,0 +1,61 @@
+@import "../../../variables";
+
+.cart{
+    padding: 30px 0;
+    &__title{
+        text-align: center;
+    }
+
+    .products{
+        @include flexboxgrid('.product',2);
+        width: 70vw;
+    }
+
+    .product{
+        border:1px solid #eee;
+        box-shadow: #d6d0d0 1px 2px 3px;
+        padding: 10px 5px;
+
+        figure{
+            width: 100%;
+            height: 150px;
+            margin: 0;
+            background-size: cover;
+        }
+
+        &__title{
+            text-align: center;
+        }
+
+        &__description{
+            > div{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 30px;
+                p{
+                    margin: 0;
+                }
+                span{
+                    color:$colorAzul;
+                    cursor:pointer;
+                    &:hover{
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        &__img{
+            cursor: pointer;
+        }
+    }
+}
+
+@media screen and (max-width: 768px){
+    .cart{        
+        .products__main, .products{
+            width: 100%;
+        }        
+    }
+}

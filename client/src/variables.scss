@@ -1,0 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Bree+Serif');
+
+/*Variables*/
+$colorAzul: #1976d2;
+$white:#ffffff;
+
+
+/*Mixins*/
+@function item-width($column,$gutter) {
+    @return calc(#{$column} - #{$gutter});
+}
+
+@mixin flexboxgrid($item,$columns,$gutter:1em){
+    $column: 100% / $columns;
+    display : flex;
+    flex-wrap: wrap;
+    margin-left : -($gutter / 2);
+    margin-right : -($gutter / 2);
+
+    #{$item}{
+        width : item-width($column,$gutter);
+        margin: $gutter / 2;
+    }
+}

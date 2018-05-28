@@ -1,0 +1,85 @@
+<app-header></app-header>
+<div class="home">
+	<div class="home__main">
+		<div class="filters">
+			<h3 class="filters__title">Filtros</h3>
+			<div class="filters__main">
+				<div class="filter">
+					<label for="filter">Nombre de producto: </label>
+					<input placeholder="Nombre" type="text" [(ngModel)]="nameFilter" name="filter" (ngModelChange)="searchProduct()">
+				</div>
+				<div class="filter--normal">				
+					<div>
+						<input (change)="filterByDisponibility()" type="checkbox" [(ngModel)]="available">
+						<label for="filter">Productos disponibles </label>
+					</div>
+					<div>
+						<input (change)="filterByNotDisponibility()" type="checkbox" [(ngModel)]="notAvailable">
+						<label for="filter">Productos agotados </label>
+					</div>	
+					<div>
+						<input (change)="filterByBestSeller()" type="checkbox" [(ngModel)]="bestSeller">
+						<label for="filter">Productos mejor vendidos </label>
+					</div>
+				</div>
+				<div class="filter">
+					<h4>Categorias</h4>
+					<div *ngFor="let category of categories; let i=index">
+						<input (change)="addCategoryToFilter(category.categori_id)" type="checkbox" [checked]="category.checked">
+						{{category.name}}
+					</div>
+				</div>
+				<div class="filter">
+					<h4>Orden por: </h4>
+					<div class="filer__order">
+						<input type="radio" name="radiogroup" [checked]="false" value="name" (change)="orderProducts('name')">
+						<label for="filter">Nombre: </label>
+					</div>
+					<div class="filer__order">
+						<input type="radio" name="radiogroup" [checked]="false" value="name" (change)="orderProducts('higherPrice')">
+						<label for="filter">Mayor precio: </label>
+					</div>
+					<div class="filer__order">
+						<input type="radio" name="radiogroup" [checked]="false" value="name" (change)="orderProducts('lowerPrice')">
+						<label for="filter">Menor precio: </label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="products__main">
+			<h3 class="home__title">Productos</h3>			
+			<div class="products">
+				<div class="product" *ngFor="let product of products">					
+					<figure (click)="open(content, product)" class="product__img" [style.backgroundImage]="'url('+ product.img +')'"></figure>
+					<div class="product__description">
+						<h4 class="product__title">{{product.name}}</h4>				
+						<div>
+							<p class="product__category">Precio: {{product.price}}</p>				
+							<span (click)="open(content, product)">Ver detalle</span>
+						</div>
+					</div>	
+				</div>		
+			</div>
+		</div>
+	</div>
+
+	<ng-template #content let-c="close" let-d="dismiss">
+		<div class="modal-header">
+			<h4 class="modal-title">{{productSelected.name}}</h4>
+			<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+			<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<figure class="product__img" [style.backgroundImage]="'url('+ productSelected.img +')'"></figure>
+			<p>{{productSelected.description}}</p>
+			<p>Precio: {{productSelected.price}}</p>
+			<span (click)="addToCart()" *ngIf="!productSelected.add">Añadir</span>
+			<span (click)="addToCart()" *ngIf="productSelected.add">Añadido</span>			
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Cerrar</button>
+		</div>
+	</ng-template>
+		  
+</div>

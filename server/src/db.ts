@@ -1,6 +1,7 @@
-import { Category } from "class/Category";
-import { Product } from "class/Product";
+import { Category } from "./class/Category";
+import { Product } from "./class/Product";
 
+/*Se hace la converson de la información que viene en el JSON a objetos (Categorias)*/
 export const categories:Category[] = [
     new Category(1,"drinks"),
     new Category(2,"lunch"),
@@ -8,6 +9,7 @@ export const categories:Category[] = [
     new Category(4,"sea")
 ]
 
+/*Se hace la converson de la información que viene en el JSON a objetos (Productos)*/
 export const products: Product[] = [
     new Product(
         1,

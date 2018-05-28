@@ -28,6 +28,9 @@ export class HomeComponent implements OnInit {
 		this.getCategories();
     }
 
+	/**
+	 * Consulta los productos
+	 */
 	getProducts(){
 		this.request.get('products',{}).subscribe((res)=>{
 			this.products = res;
@@ -37,6 +40,9 @@ export class HomeComponent implements OnInit {
 		});
 	}
 
+	/**
+	 * Consulta los productos en localStorage que son los que están añadidos al carro de compras
+	 */
 	confirmCart(){
 		let dataStore = JSON.parse(window.localStorage.getItem('products'));
 		let inDataStore = [];
@@ -53,6 +59,9 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * Consulta las categorias
+	 */
 	getCategories(){
 		this.request.get('category',{}).subscribe((res)=>{
 			this.categories = res;
@@ -63,6 +72,9 @@ export class HomeComponent implements OnInit {
 		});
 	}
 
+	/**
+	 * Filtra por nombre el producto
+	 */
 	searchProduct(){
 		if(!this.nameFilter) {
 			this.products = this.productsTmp;
@@ -74,6 +86,9 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * Agrega categorias por las cuales se filtrarán
+	 */
 	addCategoryToFilter(category){
 		if(this.categoriesFilter.length == 0 || this.categoriesFilter.indexOf(category)==-1){
 			this.categoriesFilter.push(category)			
@@ -83,6 +98,9 @@ export class HomeComponent implements OnInit {
 		this.filtersByCategory();
 	}
 
+	/**
+	 * Se filtra por los productos disponibles
+	 */
 	filterByDisponibility(){
 		if(this.available){
 			this.products = this.products.filter((product)=>{
@@ -93,6 +111,9 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * Se filtra por los productos no disponibles
+	 */
 	filterByNotDisponibility(){
 		if(this.notAvailable){
 			this.products = this.products.filter((product)=>{
@@ -103,6 +124,9 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * Filtra los productos mejor vendidos
+	 */
 	filterByBestSeller(){
 		if(this.bestSeller){
 			this.products = this.products.filter((product)=>{
@@ -113,6 +137,9 @@ export class HomeComponent implements OnInit {
 		}
 	}
 
+	/**
+	 * Ordena los productos
+	 */
 	orderProducts(type){		
 		if(type=='name') this.products.sort(this.sortByName);
 		else if(type=='higherPrice') this.products.sort(this.sortByHigherPrice);
@@ -120,12 +147,18 @@ export class HomeComponent implements OnInit {
 		else this.products = this.productsTmp;
 	}	
 
+	/**
+	 * Abre el modal de descripción de producto
+	 */
 	open(content, product) {
 		this.productSelected = product;
 		this.modalService.open(content).result.then((result) => {}, (reason) => {});
 	}
 
-	addToCart(){
+	/**
+	 * Añade productos al carrito
+	 */
+	addToCart(){	
 		if(!this.productSelected['add']){
 			let items = [];
 			this.productSelected.add = true;
@@ -138,6 +171,9 @@ export class HomeComponent implements OnInit {
 		}			
 	}
 
+	/**
+	 * Ordena productos por nombre
+	 */
 	private sortByName(a,b){		
 		if (a.name.toLowerCase() < b.name.toLowerCase())
 			return -1
@@ -146,6 +182,9 @@ export class HomeComponent implements OnInit {
 		return 0;		
 	}
 
+	/**
+	 * Ordena productos por precio de menor a mayor
+	 */
 	private sortByLowerPrice(a,b){		
 		if (a.price < b.price)
 			return -1
@@ -154,6 +193,9 @@ export class HomeComponent implements OnInit {
 		return 0;		
 	}
 
+	/**
+	 * Ordena productos por precio de mayor a menor
+	 */
 	private sortByHigherPrice(a,b){		
 		if (a.price < b.price)
 			return 1
@@ -162,6 +204,9 @@ export class HomeComponent implements OnInit {
 		return 0;		
 	}
 
+	/**
+	 * Filtra por categoria
+	 */
 	private filtersByCategory(){
 		if(this.categoriesFilter.length==0){			
 			this.products = this.productsTmp;

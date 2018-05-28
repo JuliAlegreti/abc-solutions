@@ -6,6 +6,10 @@ import { Product } from 'class/Product';
 export class ProductController {
 	constructor(private readonly appService: AppService) {}
 
+	/**
+	 * Ruta raíz del controlador de productos:
+	 * 	Devuelve todos los productos del JSON
+	 */
 	@Get()
 	findAll(): Product[] {
 		return this.appService.getProducts();

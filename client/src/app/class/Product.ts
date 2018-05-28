@@ -1,5 +1,6 @@
-import { Category } from "./Category";
-
+/**
+ * Clase para la representación del producto
+ */
 export class Product {
     id: number;
     name: string;
